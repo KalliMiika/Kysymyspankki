@@ -53,6 +53,7 @@ public class VastausDao implements Dao<Vastaus, Integer>{
                                                            "AND vaihtoehto.oikein=true");
             stmt.setInt(1, kysymys_id);
             ResultSet result = stmt.executeQuery();
+            result.next();
             return result.getInt("total");
         } catch (Exception ex) {
             Logger.getLogger(VastausDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,6 +68,7 @@ public class VastausDao implements Dao<Vastaus, Integer>{
                                                            "AND vaihtoehto.oikein=false");
             stmt.setInt(1, kysymys_id);
             ResultSet result = stmt.executeQuery();
+            result.next();
             return result.getInt("total");
         } catch (Exception ex) {
             Logger.getLogger(VastausDao.class.getName()).log(Level.SEVERE, null, ex);
