@@ -1,0 +1,37 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Kysymyshallinta</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1 th:text="${kysymys.aihe}">aihe</h1>
+        <h2 th:text="${kysymys.kysymys}">kysymys</h2>
+        
+        <ol>
+            <li th:each="vastaus : ${vastaukset}">
+                    <form method="POST" th:action=@{~/kysymyshallinta/{id}/poista(id=${kysymys.id})}>
+                        <span th:text="${vastaus.vastaus}">vastaus</span>
+                        <p th:text="${vastaus.oikein}" style="font-weight:bold">oikein</p>
+                        <input type="text" style="visibility: hidden" name="nimi" th:value="${vastaus.id}"/>
+                        <input type="submit" value="Poista"/>
+                    </form>
+                <br></br>
+            </li>
+        </ol>
+        
+        <form method="POST" th:action="@{~/kysymyshallinta/{id}(id=${kysymys.id})}">
+            <input type="text" name="vastaus"/>
+            <select name="oikein">
+                <option value="true">Oikein</option>
+                <option value="false">Väärin</option>
+            </select>
+            <br></br>
+            <input type="submit" name="submit" style="margin-left:120px" value="Lisää"/>
+        </form>
+        <br></br>
+        <a href="/ohjuspaneeli">Palaa ohjauspaneeliin</a>
+    </body>
+</html>

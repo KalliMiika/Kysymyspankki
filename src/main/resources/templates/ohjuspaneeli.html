@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Ohjuspaneeli</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1>Tervetuloa Paikalliseen Ohjauspaneeliin</h1>
+
+        <div th:each="kurssi : ${kurssit}">
+            <h2 th:text="${kurssi.nimi}">kurssi </h2>
+            <div th:each="kysymys : ${kysymykset}">
+                <div th:if="${kurssi.id} == ${kysymys.kurssi_id}">
+                    <h3 style="margin-left: 25px" th:text="${kysymys.aihe}">aihe</h3>
+                    <a th:href="@{~/kysymyshallinta/{id}(id=${kysymys.id})}" style="margin-left: 50px" th:text="${kysymys.kysymys}">kysymys</a>
+                    <form method="POST" action="/kysymys/poista">
+                        <input type="text" style="visibility: hidden" name="nimi" th:value="${kysymys.id}"/>
+                        <input type="submit" value="Poista"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br></br>
+        <h2>Lisää uusi Kysymys:</h2>
+        <form method="POST" action="/ohjuspaneeli">
+            <br>Aihe:</br>
+            <input type="text" name="aihe"/>
+            <br>Kysymys:</br>
+            <input type="text" name="kysymys"/>
+            <br>Kurssi:</br>
+            <select name="kurssi">
+                <option th:each="kurssi : ${kurssit}" th:value="${kurssi.id}" th:text="${kurssi.nimi}">
+                    Kurssin nimi
+                </option>
+            </select>
+            <br></br>
+            <input type="submit" name="submit" style="margin-left:120px" value="Lisää"/>
+        </form>
+        <br></br>
+        <h3><a href="/kurssihallinta"> Hallinnoi Kursseja </a></h3>
+        <h2><a href="/">Palaa etusivulle</a></h2>
+    </body>
+</html>

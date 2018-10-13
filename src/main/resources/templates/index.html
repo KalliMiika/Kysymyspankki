@@ -2,13 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Kysymyspankki</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
 
-        <h1>Hei maailma!</h1>
-
+        <div th:each="kurssi : ${kurssit}">
+            <h2 th:text="${kurssi.nimi}">kurssi </h2>
+            <div th:each="kysymys : ${kysymykset}">
+                <div th:if="${kurssi.id} == ${kysymys.kurssi_id}">
+                    <h3 style="margin-left: 25px" th:text="${kysymys.aihe}">aihe</h3>
+                    <a th:href="@{~/kysymys/{id}(id=${kysymys.id})}" style="margin-left: 50px" th:text="${kysymys.kysymys}">kysymys</a>
+                </div>
+            </div>
+        </div>
+        <br></br>
+        
+        <h2><a href="/ohjuspaneeli">Ohjauspaneeli</a></h2>
+        
     </body>
 </html>

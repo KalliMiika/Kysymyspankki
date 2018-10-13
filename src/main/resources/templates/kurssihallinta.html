@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Kurssihallinta</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+
+        <ol>
+            <li th:each="kurssi : ${kurssit}">
+                    <form method="POST" action="/kurssi/poista">
+                        <span th:text="${kurssi.nimi}">Kurssin nimi</span>
+                        <input type="text" style="visibility: hidden" name="nimi" th:value="${kurssi.id}"/>
+                        <input type="submit" value="Poista"/>
+                    </form>
+                <br></br>
+            </li>
+        </ol>
+
+        <form method="POST" action="/kurssi">
+            <input type="text" name="nimi"/>
+            <input type="submit" name="submit" value="Lisää"/>
+        </form>
+        
+        
+        <a href="/ohjuspaneeli">Palaa ohjauspaneeliin</a>
+    </body>
+</html>
