@@ -50,7 +50,7 @@ public class VastausDao implements Dao<Vastaus, Integer>{
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("select count(*) from vastaus, kysymys, vaihtoehto where vastaus.kysymys_id=? \n" +
                                                            "AND kysymys.id=vaihtoehto.kysymys_id AND vaihtoehto.id=vastaus.vaihtoehto_id \n" +
-                                                           "AND vaihtoehto.oikein=1");
+                                                           "AND vaihtoehto.oikein=true");
             stmt.setInt(1, kysymys_id);
             ResultSet result = stmt.executeQuery();
             return result.getInt(1);
@@ -64,7 +64,7 @@ public class VastausDao implements Dao<Vastaus, Integer>{
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("select count(*) from vastaus, kysymys, vaihtoehto where vastaus.kysymys_id=? \n" +
                                                            "AND kysymys.id=vaihtoehto.kysymys_id AND vaihtoehto.id=vastaus.vaihtoehto_id \n" +
-                                                           "AND vaihtoehto.oikein=0");
+                                                           "AND vaihtoehto.oikein=false");
             stmt.setInt(1, kysymys_id);
             ResultSet result = stmt.executeQuery();
             return result.getInt(1);
