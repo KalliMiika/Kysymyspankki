@@ -48,12 +48,12 @@ public class VastausDao implements Dao<Vastaus, Integer>{
     
     public int correctAnswersByKysymys_id(int kysymys_id) throws SQLException {
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("select count(*) from vastaus, kysymys, vaihtoehto where vastaus.kysymys_id=? \n" +
+            PreparedStatement stmt = conn.prepareStatement("select count(*) AS total from vastaus, kysymys, vaihtoehto where vastaus.kysymys_id=? \n" +
                                                            "AND kysymys.id=vaihtoehto.kysymys_id AND vaihtoehto.id=vastaus.vaihtoehto_id \n" +
                                                            "AND vaihtoehto.oikein=true");
             stmt.setInt(1, kysymys_id);
             ResultSet result = stmt.executeQuery();
-            return result.getInt(1);
+            return result.getInt("total");
         } catch (Exception ex) {
             Logger.getLogger(VastausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -62,12 +62,12 @@ public class VastausDao implements Dao<Vastaus, Integer>{
     
     public int incorrectAnswersByKysymys_id(int kysymys_id) throws SQLException {
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("select count(*) from vastaus, kysymys, vaihtoehto where vastaus.kysymys_id=? \n" +
+            PreparedStatement stmt = conn.prepareStatement("select count(*) AS total from vastaus, kysymys, vaihtoehto where vastaus.kysymys_id=? \n" +
                                                            "AND kysymys.id=vaihtoehto.kysymys_id AND vaihtoehto.id=vastaus.vaihtoehto_id \n" +
                                                            "AND vaihtoehto.oikein=false");
             stmt.setInt(1, kysymys_id);
             ResultSet result = stmt.executeQuery();
-            return result.getInt(1);
+            return result.getInt("total");
         } catch (Exception ex) {
             Logger.getLogger(VastausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
