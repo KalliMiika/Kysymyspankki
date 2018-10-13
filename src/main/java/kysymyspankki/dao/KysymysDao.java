@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kysymyspankki.database.Database;
 import kysymyspankki.domain.Kurssi;
 import kysymyspankki.domain.Kysymys;
@@ -33,7 +35,10 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
             }
 
             return new Kysymys(result.getInt("id"), result.getInt("kurssi_id"), result.getString("aihe"), result.getString("kysymys"));
+        } catch (Exception ex) {
+            Logger.getLogger(KysymysDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     public List<Kysymys> findByKurssi_id(int kurssi_id) throws SQLException {
@@ -46,7 +51,10 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
                 kysymykset.add(new Kysymys(result.getInt("id"), result.getInt("kurssi_id"), result.getString("aihe"), result.getString("kysymys")));
             }
             return kysymykset;
+        } catch (Exception ex) {
+            Logger.getLogger(KysymysDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     @Override
@@ -59,6 +67,8 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
             while (result.next()) {
                 kysymykset.add(new Kysymys(result.getInt("id"), result.getInt("kurssi_id"), result.getString("aihe"), result.getString("kysymys")));
             }
+        } catch (Exception ex) {
+            Logger.getLogger(KysymysDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return kysymykset;
@@ -78,6 +88,8 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
             stmt.setString(2, kysymys.getAihe());
             stmt.setString(3, kysymys.getKysymys());
             stmt.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(KysymysDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return findByAiheAndKysymys(kysymys.getAihe(), kysymys.getKysymys());
@@ -95,7 +107,10 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
             }
 
             return new Kysymys(result.getInt("id"), result.getInt("kurssi_id"), result.getString("aihe"), result.getString("kysymys"));
+        } catch (Exception ex) {
+            Logger.getLogger(KysymysDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     @Override
@@ -108,6 +123,8 @@ public class KysymysDao implements Dao<Kysymys, Integer>{
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Kysymys WHERE id = ?");
             stmt.setInt(1, key);
             stmt.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(KysymysDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

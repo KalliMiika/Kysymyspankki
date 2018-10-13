@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kysymyspankki.database.Database;
 import kysymyspankki.domain.Kurssi;
 import kysymyspankki.domain.Kysymys;
@@ -35,6 +37,8 @@ public class KurssiDao implements Dao<Kurssi, Integer>{
             while (result.next()) {
                 kurssit.add(new Kurssi(result.getInt("id"), result.getString("nimi")));
             }
+        } catch (Exception ex) {
+            Logger.getLogger(KurssiDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return kurssit;
@@ -52,6 +56,8 @@ public class KurssiDao implements Dao<Kurssi, Integer>{
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Kurssi (nimi) VALUES (?)");
             stmt.setString(1, kurssi.getNimi());
             stmt.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(KurssiDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return findByName(kurssi.getNimi());
@@ -68,7 +74,10 @@ public class KurssiDao implements Dao<Kurssi, Integer>{
             }
 
             return new Kurssi(result.getInt("id"), result.getString("nimi"));
+        } catch (Exception ex) {
+            Logger.getLogger(KurssiDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     @Override
@@ -81,6 +90,8 @@ public class KurssiDao implements Dao<Kurssi, Integer>{
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Kurssi WHERE id = ?");
             stmt.setInt(1, key);
             stmt.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(KurssiDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

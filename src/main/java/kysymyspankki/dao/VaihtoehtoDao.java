@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kysymyspankki.database.Database;
 import kysymyspankki.domain.Kysymys;
 import kysymyspankki.domain.Vaihtoehto;
@@ -30,7 +32,10 @@ public class VaihtoehtoDao implements Dao<Vaihtoehto, Integer>{
             }
 
             return new Vaihtoehto(result.getInt("id"), result.getInt("kysymys_id"), result.getString("vastaus"), result.getBoolean("oikein"));
+        } catch (Exception ex) {
+            Logger.getLogger(VaihtoehtoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
 
     }
     
@@ -44,7 +49,10 @@ public class VaihtoehtoDao implements Dao<Vaihtoehto, Integer>{
                 vaihtoehdot.add(new Vaihtoehto(result.getInt("id"), result.getInt("kysymys_id"), result.getString("vastaus"), result.getBoolean("oikein")));
             }
             return vaihtoehdot;
+        } catch (Exception ex) {
+            Logger.getLogger(VaihtoehtoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
 
@@ -58,6 +66,8 @@ public class VaihtoehtoDao implements Dao<Vaihtoehto, Integer>{
             while (result.next()) {
                 vaihtoehdot.add(new Vaihtoehto(result.getInt("id"), result.getInt("kysymys_id"), result.getString("vastaus"), result.getBoolean("oikein")));
             }
+        } catch (Exception ex) {
+            Logger.getLogger(VaihtoehtoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return vaihtoehdot;
@@ -77,6 +87,8 @@ public class VaihtoehtoDao implements Dao<Vaihtoehto, Integer>{
             stmt.setString(2, vaihtoehto.getVastaus());
             stmt.setBoolean(3, vaihtoehto.isOikein());
             stmt.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(VaihtoehtoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return findByVastausAndKysymys_id(vaihtoehto.getVastaus(), vaihtoehto.getKysymys_id());
@@ -94,7 +106,10 @@ public class VaihtoehtoDao implements Dao<Vaihtoehto, Integer>{
             }
 
             return new Vaihtoehto(result.getInt("id"), result.getInt("kysymys_id"), result.getString("vastaus"), result.getBoolean("oikein"));
+        } catch (Exception ex) {
+            Logger.getLogger(VaihtoehtoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     @Override
@@ -107,6 +122,8 @@ public class VaihtoehtoDao implements Dao<Vaihtoehto, Integer>{
             stmt = conn.prepareStatement("DELETE FROM Vaihtoehto WHERE id = ?");
             stmt.setInt(1, key);
             stmt.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(VaihtoehtoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

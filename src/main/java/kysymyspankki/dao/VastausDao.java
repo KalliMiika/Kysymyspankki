@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kysymyspankki.database.Database;
 import kysymyspankki.domain.Vaihtoehto;
 import kysymyspankki.domain.Vastaus;
@@ -38,7 +40,10 @@ public class VastausDao implements Dao<Vastaus, Integer>{
                 vastaukset.add(new Vastaus(result.getInt("kysymys_id"), result.getInt("vaihtoehto_id")));
             }
             return vastaukset;
+        } catch (Exception ex) {
+            Logger.getLogger(VastausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
     
     public int correctAnswersByKysymys_id(int kysymys_id) throws SQLException {
@@ -49,7 +54,10 @@ public class VastausDao implements Dao<Vastaus, Integer>{
             stmt.setInt(1, kysymys_id);
             ResultSet result = stmt.executeQuery();
             return result.getInt(1);
+        } catch (Exception ex) {
+            Logger.getLogger(VastausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
     }
     
     public int incorrectAnswersByKysymys_id(int kysymys_id) throws SQLException {
@@ -60,7 +68,10 @@ public class VastausDao implements Dao<Vastaus, Integer>{
             stmt.setInt(1, kysymys_id);
             ResultSet result = stmt.executeQuery();
             return result.getInt(1);
+        } catch (Exception ex) {
+            Logger.getLogger(VastausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
     }
     
     @Override
@@ -74,6 +85,8 @@ public class VastausDao implements Dao<Vastaus, Integer>{
             stmt.setInt(1, vastaus.getKysymys_id());
             stmt.setInt(2, vastaus.getVaihtoehto_id());
             stmt.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(VastausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
