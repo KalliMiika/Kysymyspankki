@@ -1,0 +1,25 @@
+Sqlite3 tietokantaa varten CREATE TABLE -lauseet jos haluaa kokeilla itse
+CREATE TABLE Kurssi(
+	id INTEGER PRIMARY KEY,
+	nimi VARCHAR(255)
+);
+CREATE TABLE Kysymys(
+	id integer PRIMARY KEY, 
+    kurssi_id integer,
+	aihe varchar(255),
+	kysymys varchar(255),
+	FOREIGN KEY (kurssi_id) REFERENCES Kurssi(id)
+);
+CREATE TABLE Vaihtoehto(
+	id integer PRIMARY KEY, 
+    kysymys_id integer,
+	vastaus varchar(255),
+	oikein boolean,
+	FOREIGN KEY (kysymys_id) REFERENCES Kysymys(id)
+);
+CREATE TABLE Vastaus(
+    kysymys_id integer,
+    vaihtoehto_id integer,
+	FOREIGN KEY (kysymys_id) REFERENCES Kysymys(id),
+	FOREIGN KEY (vaihtoehto_id) REFERENCES Vaihtoehto(id)
+);
