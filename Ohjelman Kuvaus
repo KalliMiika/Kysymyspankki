@@ -10,3 +10,8 @@ vastaukset poistetaan.
 Kysymyksiin vastaus puolella (Etusivu) voidaan valita kysymys, jolloin siihen voidaan vastata yhdellä annetuista
 vastausvaihtoehdoista. Jos käyttäjä haluaa, niin "Tulokset" linkistä voi katsoa, että kuinka hyvin kaikki käyttäjät
 yhteensä ovat pärjänneet kyseessä olevassa kysymyksessä.
+
+Mukana Tietokantakaavio ja CREATE TABLE -lauseet havainnollistamassa kokonaisuutta.
+
+Jos ohjelmaa haluaa testata omalla koneella, niin huomioitavaa, että tulokset eivät toimi koska en löytänyt sql lausetta jolla
+sekä postgresql että mikä lie java sqlite ajurit olisivat molemmat ymmärtäneet että 1 = true ja 0 = false.
