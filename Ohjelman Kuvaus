@@ -1,0 +1,12 @@
+Kysymyspankki sisältää kaksi osaa, Kysymysten lisäys toiminnallisuuden ja kysymyksiin vastaustoiminnallisuuden.
+
+Kysymysten lisäys puolella (Ohjuspaneeli) voidaan lisätä kursseja, joille sitten lisätään kysymyksiä.
+Luoduille kysymyksille voidaan lisätä vastausvaihtoehtoja, jotka voivat olla joko totta tai epätotta.
+Sekä kursseja, että kysymyksiä, että vastausvaihtoehtoja voidaan poistaa, jolloin myös kaikki niihin liittyvät, nyt
+turhat rivit poistetaan tietokannasta. Esimerkiksi jos poistat kurssin, niin kaikki siihen liittyvät kysymykset poistetaan
+ja kaikki poistettuihin kysymyksiin liittyvät vastausvaihtoehdot poistetaan ja kaikki vastausvaihtoehtoihin liittyvät
+vastaukset poistetaan.
+
+Kysymyksiin vastaus puolella (Etusivu) voidaan valita kysymys, jolloin siihen voidaan vastata yhdellä annetuista
+vastausvaihtoehdoista. Jos käyttäjä haluaa, niin "Tulokset" linkistä voi katsoa, että kuinka hyvin kaikki käyttäjät
+yhteensä ovat pärjänneet kyseessä olevassa kysymyksessä.
